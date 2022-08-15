@@ -1,5 +1,10 @@
-// const postingRoutes = require('./post-routes');
+import authRouter from './auth';
+import postsRouter from './posts';
+import usersRouter from './users';
+import express from "express";
 
-// module.exports = function loadRoutes(app){
-//         postingRoutes(app);
-// };
+const appRouter = express.Router();
+
+appRouter.use(authRouter, postsRouter, usersRouter);
+
+export default appRouter;
