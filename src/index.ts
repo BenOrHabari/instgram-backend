@@ -1,11 +1,13 @@
-const express = require('express');
+import "dotenv/config";
+import express from 'express';
+
 
 const app = express();
 
-const loadRoutes = require("./routes/index");
+// const loadRoutes = require("./routes/index");
 
-app.use(express.json());
+// app.use(express.json());
 
-loadRoutes(app);
+// loadRoutes(app);
 
-app.listen(5000, () => console.log('app is running'));
+app.listen(process.env.PORT, () => console.log('app is running on port ' + process.env.PORT));
