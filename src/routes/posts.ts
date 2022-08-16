@@ -1,17 +1,17 @@
 import express from "express";
+import { getPostComments, getPostLikes, getPost, getUserFeed, like, unlike, getPostById } from "../controllers/posts-controller";
+import verifyUser from "../middlewares/verify-user";
 
 const router = express.Router();
 
-function sendResponse(req, res){
-    res.json({avi: '1'});
-};
+router.use(verifyUser);
 
-router.get('/api/feed', sendResponse);
-router.get('/api/posts/:postId', sendResponse);
-router.get('/api/posts/:postId/comments', sendResponse);
-router.get('/api/posts/:postId/likes', sendResponse);
+router.get('/api/feed', getUserFeed);
+router.get('/api/posts/:postId',getPostById, getPost);
+router.get('/api/posts/:postId/comments',getPostById, getPostComments);
+router.get('/api/posts/:postId/likes',getPostById, getPostLikes);
 
-router.post('/api/posts/:postId/like', sendResponse);
-router.post('/api/posts/:postId/unlike', sendResponse);
+router.post('/api/posts/:postId/like', getPostById, like);
+router.post('/api/posts/:postId/unlike', getPostById, unlike);
 
 export default router;

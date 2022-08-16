@@ -1,13 +1,11 @@
 import express from "express";
+import { login, register, userInfo } from "../controllers/auth-controller";
+import verifyUser from "../middlewares/verify-user";
 
 const router = express.Router();
 
-function sendResponse(req, res){
-    res.json({avi: '1'});
-};
-
-router.post('/api/login', sendResponse);
-router.post('/api/register', sendResponse);
-router.get('/api/user-info', sendResponse);
+router.post('/api/login', login);
+router.post('/api/register', register);
+router.get('/api/user-info', verifyUser, userInfo);
 
 export default router;
